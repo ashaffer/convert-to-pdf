@@ -12,6 +12,7 @@ module.exports = function(name, cb) {
 
   var bufStream = new stream.PassThrough();
   unoconv.convert(name, 'pdf', function(err, buf) {
+    console.log('asdf', err, buf);
     if(err) {
       bufStream.emit('error', err);
       bufStream.end(null);
