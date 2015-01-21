@@ -14,5 +14,5 @@ module.exports = function(fileName, opts, cb) {
     return;
   }
 
-  unoconv.convert(fileName, 'pdf', cb);
+  unoconv.convert(fileName, 'pdf', {}, cb);
 };
