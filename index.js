@@ -14,6 +14,7 @@ module.exports = function(name, cb) {
   unoconv.convert(name, 'pdf', function(err, buf) {
     if(err) {
       bufStream.emit('error', err);
+      bufStream.end(null);
       return;
     }
 
