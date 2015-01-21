@@ -10,7 +10,7 @@ module.exports = function(name, cb) {
   if(ext === '.pdf')
     return fs.createReadStream(name);
 
-  var bufStream = new stream.PassThrough();
+  var bufStream = new stream.Transform();
   unoconv.convert(name, 'pdf', function(err, buf) {
     console.log('asdf', err, buf);
     if(err) {
@@ -19,7 +19,8 @@ module.exports = function(name, cb) {
       return;
     }
 
-    bufStream.end(buf);
+    bufStream.push(buf);
+    bufStream.end();
   });
 
   return bufStream;
