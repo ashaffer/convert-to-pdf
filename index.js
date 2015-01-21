@@ -8,7 +8,7 @@ module.exports = function(name, cb) {
 
   // If it's already a pdf, just return the file as a Buffer
   if(ext === '.pdf') {
-    cb(null, fs.readReadStream(name));
+    cb(null, fs.createReadStream(name));
     return;
   }
 
