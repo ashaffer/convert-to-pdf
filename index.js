@@ -7,10 +7,8 @@ module.exports = function(name, cb) {
   var ext = path.extname(name);
 
   // If it's already a pdf, just return the file as a Buffer
-  if(ext === '.pdf') {
-    cb(null, fs.createReadStream(name));
-    return;
-  }
+  if(ext === '.pdf')
+    return fs.createReadStream(name);
 
   var bufStream = new stream.PassThrough();
   unoconv.convert(name, 'pdf', function(err, buf) {
