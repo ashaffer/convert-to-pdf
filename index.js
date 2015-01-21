@@ -1,5 +1,4 @@
 var unoconv = require('unoconv');
-var stream = require('stream');
 var path = require('path');
 var fs = require('fs');
 
@@ -7,21 +6,10 @@ module.exports = function(name, cb) {
   var ext = path.extname(name);
 
   // If it's already a pdf, just return the file as a Buffer
-  if(ext === '.pdf')
-    return fs.createReadStream(name);
+  if(ext === '.pdf') {
+    cb(null, fs.readFileSync(name));
+    return;
+  }
 
-  var bufStream = new stream.Transform();
-  unoconv.convert(name, 'pdf', function(err, buf) {
-    console.log('asdf', err, buf);
-    if(err) {
-      bufStream.emit('error', err);
-      bufStream.end(null);
-      return;
-    }
-
-    bufStream.push(buf);
-    bufStream.end();
-  });
-
-  return bufStream;
+  unoconv.convert(name, 'pdf', cb);
 };
