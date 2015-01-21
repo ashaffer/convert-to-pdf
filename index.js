@@ -1,6 +1,7 @@
 var unoconv = require('unoconv');
 var stream = require('stream');
 var path = require('path');
+var fs = require('fs');
 
 module.exports = function(name, cb) {
   var ext = path.extname(name);
