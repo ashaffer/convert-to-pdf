@@ -3,6 +3,11 @@ var path = require('path');
 var fs = require('fs');
 
 module.exports = function(fileName, opts, cb) {
+  if('function' === typeof opts) {
+    cb = opts;
+    opts = {};
+  }
+
   var type;
   opts = opts || {};
 
